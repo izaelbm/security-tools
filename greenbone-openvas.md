@@ -117,3 +117,6 @@ docker exec -it id_container bash
 sudo runuser -u gvm -- gvmd --create-user=admin
 sudo runuser -u gvm -- gvmd --user=admin --new-password=MinhaSenhaSegura123
 
+3 - Update Feed
+docker exec -it da063a7356bf greenbone-feed-sync --type all
+
