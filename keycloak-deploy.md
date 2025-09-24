@@ -1,6 +1,11 @@
 ###
 1 - Deploy Tool With Docker
 ###
+docker network create \
+  --driver bridge \
+  --subnet 10.43.102.0/24 \
+  --gateway 10.43.102.1 \
+
 
 docker run -d \
   --name keycloak \
