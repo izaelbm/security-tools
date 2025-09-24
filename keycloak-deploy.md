@@ -4,14 +4,24 @@
 
 docker run -d \
   --name keycloak \
+  --restart unless-stopped \
+  --network keycloak-net \
   -p 9898:8080 \
   -e KEYCLOAK_ADMIN=admin \
-  -e KEYCLOAK_ADMIN_PASSWORD=admin123 \
-  -e KC_PROXY=edge \
+  -e KEYCLOAK_ADMIN_PASSWORD='##senhanocofre##' \
+  -e KC_DB=mysql \
+  -e KC_DB_URL='jdbc:mysql://keycloak-db:3306/keycloak' \
+  -e KC_DB_USERNAME=keycloak \
+  -e KC_DB_PASSWORD='##senhanocofre##' \
+  -e KC_PROXY_HEADERS=xforwarded \
   -e KC_HTTP_ENABLED=true \
   -e KC_HOSTNAME=keycloak.grpereira.com.br \
+  -v /opt/keycloak/keycloak-data/data:/opt/keycloak/data \
+  -v /opt/keycloak/keycloak-data/providers:/opt/keycloak/providers \
+  -v /opt/keycloak/keycloak-data/conf:/opt/keycloak/conf \
+  -v /opt/keycloak/keycloak-data/export:/opt/keycloak/export \
   quay.io/keycloak/keycloak:24.0.4 \
-  start-dev
+  start
 
 
 ###
