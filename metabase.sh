@@ -32,3 +32,20 @@ sudo docker run -d \
   -e JAVA_TOOL_OPTIONS='-Duser.timezone=America/Sao_Paulo' \
   -v /opt/metabase/metabase-plugins:/plugins \
   metabase/metabase:latest
+
+
+sudo docker run -d \
+  --name metabase \
+  --restart=unless-stopped \
+  --network metabase-net \
+  -p 3000:3000 \
+  -e MB_DB_TYPE=mysql \
+  -e MB_DB_DBNAME=metabase \
+  -e MB_DB_USER=metabase \
+  -e MB_DB_PASS='@metabase#pass' \
+  -e MB_DB_HOST=metabase-db \
+  -e MB_DB_PORT=3306 \
+  -e MB_PLUGINS_DIR=/plugins \
+  -e JAVA_TOOL_OPTIONS='-Duser.timezone=America/Sao_Paulo' \
+  -v /opt/metabase/metabase-plugins:/plugins \
+  metabase/metabase:latest
